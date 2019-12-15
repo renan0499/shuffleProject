@@ -1,27 +1,15 @@
 import pygame
 
-'''
-def firstButton():
-    screen = pygame.display.set_mode((1000, 600))
-    screen.fill((0,0,0))
-    
-    while(True):
-        screen.fill((0,0,0))
-
-        for event in pygame.event.get():
-            if (event.type == pygame.QUIT):
-                exit()
-'''
-
-def main ():
+def firstScreen():
     #inicia pygame e pygame.font
     pygame.init()
     pygame.font.init()
     myFont = pygame.font.SysFont('Arial', 23)
     #define resolucao de ecra
     screen = pygame.display.set_mode((1000, 600))
-    x = 0
-    while(x == 0):
+    
+
+    while(True):
         #pinta o ecra todo com preto
         screen.fill((0,0,0))
         #cria a posição do rato para x e y
@@ -87,16 +75,15 @@ def main ():
             textRect6 = myFont.render('Exit', True, (255,255,255))
             screen.blit(textRect6,(481,462))
 
-
-            
-        #fecha o jogo quando se carrega no X
+        #fecha o jogo quando se carregar no X
         for event in pygame.event.get():
             if (event.type == pygame.QUIT):
                 exit()
             
             if (event.type == pygame.MOUSEBUTTONDOWN):
                 if (rect1):
-                    pass
+                    x = 1
+                
             if (event.type == pygame.MOUSEBUTTONDOWN):
                 if (rect2):
                     pass
@@ -114,10 +101,32 @@ def main ():
                     exit()
         
         pygame.display.flip()
+
+
+def firstButton():
+    pygame.init()
+    pygame.font.init()
+    myFont = pygame.font.SysFont('Arial', 23)
+    screen = pygame.display.set_mode((1000, 600))
     
+    while(True):
+        screen.fill((0,0,0))
+
+        for event in pygame.event.get():
+            if (event.type == pygame.QUIT):
+                exit()
+
+
+def main ():
+    x = 0
+
+    while (True):
+        if (x == 0):
+            firstScreen()
+        
+
+        if (x == 1):
+            firstButton()
     
-
-
-
 
 main()
