@@ -1,4 +1,6 @@
 import pygame
+from button import *
+from variables import *
 
 ##############################################################################
 def firstScreen():
@@ -7,72 +9,28 @@ def firstScreen():
     myFont = pygame.font.SysFont('Arial', 23)
     #define resolucao de ecra
     screen = pygame.display.set_mode((1000, 600))
+    #load da imagem
+    image = pygame.image.load("shuffle.png")
     
+
+
     while(x == 0):
-        #pinta o ecra todo com preto
-        screen.fill((0,0,0))
         #cria a posição do rato para x e y
         pos_x, pos_y = pygame.mouse.get_pos()
+        #pinta o ecra todo com preto
+        screen.fill((0,0,0))
+        screen.blit(image, (100, 0))
+        
+        # class button = color, colorOver, maxX, minX, minY, maxY, x, y, xlenght, ylenght, hasText, textInput   #
+        #criar os rectangulos
+        rect1 = Button(False, False, yellow, white, 550, 450, 240, 270, 450, 240, 100, 30, True, '4x3')
+        rect2 = Button(False, False, yellow, white, 550, 450, 280, 310, 450, 280, 100, 30, True, '4x4')
+        rect3 = Button(False, False, yellow, white, 550, 450, 320, 350, 450, 320, 100, 30, True, '5x4')
+        rect4 = Button(False, False, yellow, white, 550, 450, 360, 390, 450, 360, 100, 30, True, '6x5')
+        rect5 = Button(False, False, yellow, white, 550, 450, 400, 430, 450, 400, 100, 30, True, '6x6')
+        rectExit = Button(False, False, yellow, white, 550, 450, 460, 490, 450, 460, 100, 30, True, 'Exit')
+        
 
-
-        #define uma posicao de x e y do rectangulo, para saber quando o rato passar por cima
-        rect1 = pos_x < 550 and pos_x > 450 and pos_y > 240 and pos_y < 270
-        #desenha o rectangulo
-        pygame.draw.rect(screen, (yellow), (450, 240, 100, 30), 2)
-        #cria text e imprime o texto
-        textRect1 = myFont.render('4x3', True, (yellow))
-        screen.blit(textRect1,(481,242))
-        #2
-        rect2 = pos_x < 550 and pos_x > 450 and pos_y > 280 and pos_y < 310
-        pygame.draw.rect(screen, (yellow), (450, 280, 100, 30), 2)
-        textRect2 = myFont.render('4x4', True, (yellow))
-        screen.blit(textRect2,(481,282))
-        #3
-        rect3 = pos_x < 550 and pos_x > 450 and pos_y > 320 and pos_y < 350
-        pygame.draw.rect(screen, (yellow), (450, 320, 100, 30), 2)
-        textRect3 = myFont.render('5x4', True, (yellow))
-        screen.blit(textRect3,(481,322))
-        #4
-        rect4 = pos_x < 550 and pos_x > 450 and pos_y > 360 and pos_y < 390
-        pygame.draw.rect(screen, (yellow), (450, 360, 100, 30), 2)
-        textRect4 = myFont.render('6x5', True, (yellow))
-        screen.blit(textRect4,(481,362))
-        #5
-        rect5 = pos_x < 550 and pos_x > 450 and pos_y > 400 and pos_y < 430
-        pygame.draw.rect(screen, (yellow), (450, 400, 100, 30), 2)
-        textRect5 = myFont.render('6x6', True, (yellow))
-        screen.blit(textRect5,(481,402))
-        #6
-        rect6 = pos_x < 550 and pos_x > 450 and pos_y > 460 and pos_y < 490
-        pygame.draw.rect(screen, (yellow), (450, 460, 100, 30), 2)
-        textRect6 = myFont.render('Exit', True, (yellow))
-        screen.blit(textRect6,(481,462))
-
-        #muda rectangulos e texto de cor quando rato passa por cima
-        if (rect1): 
-            pygame.draw.rect(screen, (white), (450, 240, 100, 30), 3)
-            textRect1 = myFont.render('4x3', True, (white))
-            screen.blit(textRect1,(481,242))
-        if (rect2): 
-            pygame.draw.rect(screen, (white), (450, 280, 100, 30), 3)
-            textRect2 = myFont.render('4x4', True, (white))
-            screen.blit(textRect2,(481,282))
-        if (rect3): 
-            pygame.draw.rect(screen, (white), (450, 320, 100, 30), 3)
-            textRect3 = myFont.render('5x4', True, (white))
-            screen.blit(textRect3,(481,322))
-        if (rect4): 
-            pygame.draw.rect(screen, (white), (450, 360, 100, 30), 3)
-            textRect4 = myFont.render('6x5', True, (white))
-            screen.blit(textRect4,(481,362))
-        if (rect5): 
-            pygame.draw.rect(screen, (white), (450, 400, 100, 30), 3)
-            textRect5 = myFont.render('6x6', True, (white))
-            screen.blit(textRect5,(481,402))
-        if (rect6): 
-            pygame.draw.rect(screen, (white), (450, 460, 100, 30), 3)
-            textRect6 = myFont.render('Exit', True, (white))
-            screen.blit(textRect6,(481,462))
 
         #fecha o jogo quando se carregar no X
         for event in pygame.event.get():
@@ -80,30 +38,30 @@ def firstScreen():
                 exit()
             
             if (event.type == pygame.MOUSEBUTTONDOWN):
-                if (rect1):
+                if (rect1.pos):
                     x = 1
-                
             if (event.type == pygame.MOUSEBUTTONDOWN):
-                if (rect2):
+                if (rect2.pos):
                     pass
             if (event.type == pygame.MOUSEBUTTONDOWN):
-                if (rect3):
+                if (rect3.pos):
                     pass
             if (event.type == pygame.MOUSEBUTTONDOWN):
-                if (rect4):
+                if (rect4.pos):
                     pass
             if (event.type == pygame.MOUSEBUTTONDOWN):
-                if (rect5):
+                if (rect5.pos):
                     pass
             if (event.type == pygame.MOUSEBUTTONDOWN):
-                if (rect6):
+                if (rectExit.pos):
                     exit()
-        
+
         pygame.display.flip()
 ##############################################################################
 def firstButton():
     #define resolucao de ecra
     screen = pygame.display.set_mode((1000, 600))
+    myFont = pygame.font.SysFont('Arial', 23)
 
     possibilidades = {}
     class geoForm:
@@ -111,55 +69,40 @@ def firstButton():
             self.form = form
             self.color = color
 
+    global x, white, green
+
     redSquare = geoForm('square', 'green')
 
 
     while(x == 1):
         screen.fill((0,0,0))
         pos_x, pos_y = pygame.mouse.get_pos()
-        print(pos_x, pos_y)
+
         #define uma posicao de x e y do rectangulo, para saber quando o rato passar por cima
         #desenha o rectangulo
-        rect1 = pos_x < 365 and pos_x > 265 and pos_y > 50 and pos_y < 200
-        pygame.draw.rect(screen, (green), (265, 50, 100, 150))
-        #2
-        rect2 = pos_x < 365 and pos_x > 265 and pos_y > 225 and pos_y < 375
-        pygame.draw.rect(screen, (green), (265, 225, 100, 150))
-        #3
-        rect3 = pos_x < 365 and pos_x > 265 and pos_y > 400 and pos_y < 550
-        pygame.draw.rect(screen, (green), (265, 400, 100, 150))
-        #4
-        rect4 = pos_x < 490 and pos_x > 390 and pos_y > 50 and pos_y < 200
-        pygame.draw.rect(screen, (green), (390, 50, 100, 150))
-        #5
-        rect5 = pos_x < 490 and pos_x > 390 and pos_y > 225 and pos_y < 375
-        pygame.draw.rect(screen, (green), (390, 225, 100, 150))
-        #6
-        rect6 = pos_x < 490 and pos_x > 390 and pos_y > 400 and pos_y < 550
-        pygame.draw.rect(screen, (green), (390, 400, 100, 150))
-        #7
-        rect7 = pos_x < 615 and pos_x > 515 and pos_y > 50 and pos_y < 200
-        pygame.draw.rect(screen, (green), (515, 50, 100, 150))
-        #8
-        rect8 = pos_x < 615 and pos_x > 515 and pos_y > 225 and pos_y < 375
-        pygame.draw.rect(screen, (green), (515, 225, 100, 150))
-        #9
-        rect9 = pos_x < 615 and pos_x > 515 and pos_y > 400 and pos_y < 550
-        pygame.draw.rect(screen, (green), (515, 400, 100, 150))
-        #10
-        rect10 = pos_x < 740 and pos_x > 640 and pos_y > 50 and pos_y < 200
-        pygame.draw.rect(screen, (green), (640, 50, 100, 150))
-        #11
-        rect11 = pos_x < 740 and pos_x > 640 and pos_y > 225 and pos_y < 375
-        pygame.draw.rect(screen, (green), (640, 225, 100, 150))
-        #12
-        rect12 = pos_x < 740 and pos_x > 640 and pos_y > 400 and pos_y < 550
-        pygame.draw.rect(screen, (green), (640, 400, 100, 150))
+        
+        rect11 = Button(True, False, green, white, 365, 265, 50, 200, 265, 50, 100, 150, False, '')
+        rect21 = Button(True, False, green, white, 365, 265, 225, 375, 265, 225, 100, 150, False, '')
+        rect31 = Button(True, False, green, white, 365, 265, 400, 550, 265, 400, 100, 150, False, '')
+        rect12 = Button(True, False, green, white, 490, 390, 50, 200, 390, 50, 100, 150, False, '')
+        rect22 = Button(True, False, green, white, 490, 390, 225, 375, 390, 225, 100, 150, False, '')
+        rect32 = Button(True, False, green, white, 490, 390, 400, 550, 390, 400, 100, 150, False, '')
+        rect13 = Button(True, False, green, white, 615, 515, 50, 200, 515, 50, 100, 150, False, '')
+        rect23 = Button(True, False, green, white, 615, 515, 225, 375, 515, 225, 100, 150, False, '')
+        rect33 = Button(True, False, green, white, 615, 515, 400, 550, 515, 400, 100, 150, False, '')
+        rect14 = Button(True, False, green, white, 740, 640, 50, 200, 640, 50, 100, 150, False, '')
+        rect24 = Button(True, False, green, white, 740, 640, 225, 375, 640, 225, 100, 150, False, '')
+        rect34 = Button(True, False, green, white, 740, 640, 400, 550, 640, 400, 100, 150, False, '')
+
 
         for event in pygame.event.get():
             if (event.type == pygame.QUIT):
                 exit()
-        
+            
+            if (event.type == pygame.MOUSEBUTTONDOWN):
+                if (rect11):
+                    rect11.isClicked = True
+            
 
 
         pygame.display.flip()
@@ -169,12 +112,12 @@ def main ():
     #pygame
     pygame.init()
     pygame.font.init()
-    #variaveis
-    global x, yellow, white, green
-    yellow, white, green =  (255,255,  0), (255,255,255), (0  , 150, 0) 
+    global x, yellow, white, green, pos_x, pos_y, screen, myFont
+
     x = 0
 
     while (True):
+
         if (x == 0):
             firstScreen()
 
